@@ -10,48 +10,58 @@ using System.Threading.Tasks;
 
 namespace TcpChatServer {
     class Program {
-        //private static Dictionary<string, TcpClient> _users; //name, obj
+        private static Dictionary<string, TcpClient> _users; //name, obj
+        private static TcpListener serverSocket = new TcpListener(IPAddress.Any, 6789);
+
 
         static void Main(string[] args) {
-
             //set up basics (NetworkStream?)
-            TcpListener serverSocket = new TcpListener(IPAddress.Any, 6789);
-            serverSocket.Start();
-            Console.WriteLine("Server started.");
+            _users = new Dictionary<string, TcpClient>();
+            StartServer();
+            //TcpListener serverSocket = new TcpListener(IPAddress.Any, 6789);
+            //serverSocket.Start();
+            //Console.WriteLine("Server started.");
 
-            /* multi-clienting
-            while(true) {
-                connectionSocket = serverSocket.AcceptTcpClient();
-                ThreadPool.QueueUserWorkItem(DoClient, connectionSocket);
-            }
-            */
+            //TcpClient connectionSocket;
+            //while(true) {
 
-            
-            TcpClient connectionSocket = serverSocket.AcceptTcpClient();
-            Console.WriteLine("Connection accepted, server activated.");
+                //connectionSocket = serverSocket.AcceptTcpClient();
+                //ThreadPool.QueueUserWorkItem(DoClient, connectionSocket);
+            //}
 
-            NetworkStream ns = connectionSocket.GetStream();
-            StreamWriter sw = new StreamWriter(ns);
-            sw.AutoFlush = true;
-            StreamReader sr = new StreamReader(ns);
-            ReadFromStream reader = new ReadFromStream(sr);
-            WriteToStream writer = new WriteToStream(sw);
+            Console.ReadKey();
+
+
         }
 
+        private static void StartServer() {
+            serverSocket.Start();
+            Console.WriteLine("Server started.");
+            AcceptConnection();
+        }
 
-        //ReadMessage()
-        //WriteMessage()
+        private static void AcceptConnection() {
+            serverSocket.BeginAcceptTcpClient(DoClient, serverSocket);
+
+        }
 
         //DoClient()
-            //client class?
-            //add number to client for identification (property?)
-            //sign-up where client is asked for own ID?
-        private static void DoClient(object obj) {
-            TcpClient client = (TcpClient)obj;
+        //client class?
+        //add number to client for identification (property?)
+        //sign-up where client is asked for own ID?
+        private static void DoClient(IAsyncResult result) {
+            AcceptConnection();
+            TcpClient client = serverSocket.EndAcceptTcpClient(result);
+            string clientName = $"Client {_users.Count + 1}";
+            _users.Add(clientName, client);
             NetworkStream ns = client.GetStream();
             StreamWriter sw = new StreamWriter(ns);
             sw.AutoFlush = true;
             StreamReader sr = new StreamReader(ns);
+            ReadFromStream reader = new ReadFromStream(sr, clientName);
+            WriteToStream writer = new WriteToStream(sw, clientName);
+
+
             Console.WriteLine("Client connected.");
         }
 

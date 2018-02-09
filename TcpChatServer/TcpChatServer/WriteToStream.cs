@@ -12,13 +12,14 @@ namespace TcpChatServer {
     /// </summary>
     public class WriteToStream {
         private static StreamWriter _sw;
+        private static string _name;
         private static Thread _oThread;
 
         /// <summary>
         /// Initialises a new instance of WriteToStream for the specified StreamWriter and starts the thread.
         /// </summary>
         /// <param name="sw">StreamWriter creates with a NetworkStream.</param>
-        public WriteToStream(StreamWriter sw) {
+        public WriteToStream(StreamWriter sw, string name) {
             _sw = sw;
             _sw.AutoFlush = true;
             _oThread = new Thread(Write);
