@@ -23,5 +23,8 @@ namespace TcpChatServer {
         //WriteMessage()
 
         //DoClient()
+            //client class?
+            //add number to client for identification (property?)
+            //sign-up where client is asked for own ID?
     }
 }
