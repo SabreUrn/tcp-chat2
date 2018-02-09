@@ -15,18 +15,13 @@ namespace TcpChatClient {
         private static Thread _oThread;
 
         /// <summary>
-        /// Initialises a new instance of ReadFromStream for the specified StreamReader.
+        /// Initialises a new instance of ReadFromStream for the specified StreamReader and starts the thread.
         /// </summary>
         /// <param name="sr">StreamReader created with a NetworkStream.</param>
         public ReadFromStream(StreamReader sr) {
             _sr = sr;
             _oThread = new Thread(Read);
-        }
 
-        /// <summary>
-        /// Starts the private thread for reading messages from the StreamReader.
-        /// </summary>
-        public void ReadMessage() {
             _oThread.Start();
         }
 

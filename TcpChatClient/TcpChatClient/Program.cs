@@ -20,8 +20,6 @@ namespace TcpChatClient {
             ReadFromStream reader = new ReadFromStream(sr);
             WriteToStream writer = new WriteToStream(sw);
             Console.WriteLine("Stream established.");
-
-            reader.ReadMessage();
         }
 
         //WaitForServer()

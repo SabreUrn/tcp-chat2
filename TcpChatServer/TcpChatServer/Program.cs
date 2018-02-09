@@ -36,8 +36,6 @@ namespace TcpChatServer {
             StreamReader sr = new StreamReader(ns);
             ReadFromStream reader = new ReadFromStream(sr);
             WriteToStream writer = new WriteToStream(sw);
-
-            reader.ReadMessage();
         }
 
 
@@ -48,7 +46,6 @@ namespace TcpChatServer {
             //client class?
             //add number to client for identification (property?)
             //sign-up where client is asked for own ID?
-        /* multi-clienting
         private static void DoClient(object obj) {
             TcpClient client = (TcpClient)obj;
             NetworkStream ns = client.GetStream();
@@ -57,7 +54,6 @@ namespace TcpChatServer {
             StreamReader sr = new StreamReader(ns);
             Console.WriteLine("Client connected.");
         }
-        */
 
     }
 }

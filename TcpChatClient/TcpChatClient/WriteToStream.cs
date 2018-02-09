@@ -15,7 +15,7 @@ namespace TcpChatClient {
         private static Thread _oThread;
 
         /// <summary>
-        /// Initialises a new instance of WriteToStream for the specified StreamWriter.
+        /// Initialises a new instance of WriteToStream for the specified StreamWriter and starts the thread.
         /// </summary>
         /// <param name="sw">StreamWriter created with a NetworkStream.</param>
         public WriteToStream(StreamWriter sw) {
