@@ -22,19 +22,8 @@ namespace TcpChatClient {
             Console.WriteLine("Stream established.");
 
             reader.ReadMessage();
-
-            while (true) {
-                //Console.Write("You: ");
-                writer.WriteMessage();
-                //sw.WriteLine(Console.ReadLine());
-            }
         }
 
-        static void Run() {
-            //Connect()
-        }
-
-        //Connect()
         //WaitForServer()
         private static TcpClient WaitForServer() {
             TcpClient clientSocket = new TcpClient();

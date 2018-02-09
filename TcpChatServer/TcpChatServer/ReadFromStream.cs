@@ -17,7 +17,6 @@ namespace TcpChatServer {
         }
         
         public void ReadMessage() {
-            //Task task = new Task(Read);
             _oThread.Start();
         }
 

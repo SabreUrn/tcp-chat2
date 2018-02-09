@@ -18,11 +18,6 @@ namespace TcpChatServer {
             _oThread.Start();
         }
 
-        public void WriteMessage() {
-            //_oThread = new Thread(Write);
-            //_oThread.Start();
-        }
-
         private static void Write() {
             while(true) {
                 _sw.WriteLine(Console.ReadLine());

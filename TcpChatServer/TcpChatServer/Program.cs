@@ -38,24 +38,6 @@ namespace TcpChatServer {
             WriteToStream writer = new WriteToStream(sw);
 
             reader.ReadMessage();
-            //string message = null;
-            //while (true) {
-            //    message = sr.ReadLine();
-            //    if (message != null) {
-            //        Console.WriteLine("Client: " + message);
-            //        message = null;
-            //    }
-            //}
-
-            while(true) {
-                writer.WriteMessage();
-            }
-        }
-
-        static void Run() {
-            //listen for clients
-            //DoClient() where client properties are initialised
-            //
         }
 
 
