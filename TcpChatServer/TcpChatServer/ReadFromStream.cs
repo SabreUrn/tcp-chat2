@@ -7,19 +7,32 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace TcpChatServer {
+    /// <summary>
+    /// Reads data as strings from a StreamReader in a separate thread.
+    /// </summary>
     public class ReadFromStream {
         private static StreamReader _sr;
         private static Thread _oThread;
 
+        /// <summary>
+        /// Initialises a new instance of ReadFromStream for the specified StreamReader.
+        /// </summary>
+        /// <param name="sr">StreamReader created with a NetworkStream.</param>
         public ReadFromStream(StreamReader sr) {
             _sr = sr;
             _oThread = new Thread(Read);
         }
         
+        /// <summary>
+        /// Starts the private thread for reading messages from the StreamReader.
+        /// </summary>
         public void ReadMessage() {
             _oThread.Start();
         }
 
+        /// <summary>
+        /// Infinitely reads from the StreamReader for use with its own thread.
+        /// </summary>
         private static void Read() {
             while(true) {
                 string message = _sr.ReadLine();

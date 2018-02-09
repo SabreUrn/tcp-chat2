@@ -25,6 +25,11 @@ namespace TcpChatClient {
         }
 
         //WaitForServer()
+        /// <summary>
+        /// Attempts to connect to server.
+        /// Catches SocketException and retries connection every 5 seconds until connection is achieved.
+        /// </summary>
+        /// <returns>Returns a TcpClient connected to server.</returns>
         private static TcpClient WaitForServer() {
             TcpClient clientSocket = new TcpClient();
             bool serverFound = false;
